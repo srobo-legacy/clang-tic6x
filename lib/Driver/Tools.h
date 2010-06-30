@@ -390,6 +390,40 @@ namespace dragonfly {
   };
 } // end namespace dragonfly
 
+  /// tms320c64x -- Directly call GNU Binutils assembler and linker
+namespace tms320c64x {
+  class VISIBILITY_HIDDEN Assemble : public Tool  {
+  public:
+    Assemble(const ToolChain &TC) : Tool("tms320c64x::Assemble", TC) {}
+
+    virtual bool acceptsPipedInput() const { return true; }
+    virtual bool canPipeOutput() const { return true; }
+    virtual bool hasIntegratedCPP() const { return false; }
+
+    virtual void ConstructJob(Compilation &C, const JobAction &JA,
+                              Job &Dest,
+                              const InputInfo &Output,
+                              const InputInfoList &Inputs,
+                              const ArgList &TCArgs,
+                              const char *LinkingOutput) const;
+  };
+  class VISIBILITY_HIDDEN Link : public Tool  {
+  public:
+    Link(const ToolChain &TC) : Tool("tms320c64x::Link", TC) {}
+
+    virtual bool acceptsPipedInput() const { return true; }
+    virtual bool canPipeOutput() const { return true; }
+    virtual bool hasIntegratedCPP() const { return false; }
+
+    virtual void ConstructJob(Compilation &C, const JobAction &JA,
+                              Job &Dest,
+                              const InputInfo &Output,
+                              const InputInfoList &Inputs,
+                              const ArgList &TCArgs,
+                              const char *LinkingOutput) const;
+  };
+} // end namespace tms320c64x
+
 } // end namespace toolchains
 } // end namespace driver
 } // end namespace clang

@@ -916,6 +916,29 @@ Linux::Linux(const HostInfo &Host, const llvm::Triple& Triple)
   // list), but that's messy at best.
 }
 
+TMS320C64X::TMS320C64X(const HostInfo &Host, const llvm::Triple& Triple)
+  : Generic_GCC(Host, Triple) {
+}
+
+Tool &TMS320C64X::SelectTool(const Compilation &C, const JobAction &JA) const {
+  Action::ActionClass Key;
+  Key = JA.getKind();
+
+  Tool *&T = Tools[Key];
+  if (!T) {
+    switch (Key) {
+    case Action::AssembleJobClass:
+      T = new tools::tms320c64x::Assemble(*this); break;
+    case Action::LinkJobClass:
+      T = new tools::tms320c64x::Link(*this); break;
+    default:
+      T = &Generic_GCC::SelectTool(C, JA);
+    }
+  }
+
+  return *T;
+}
+
 /// DragonFly - DragonFly tool chain which can call as(1) and ld(1) directly.
 
 DragonFly::DragonFly(const HostInfo &Host, const llvm::Triple& Triple)

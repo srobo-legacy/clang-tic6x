@@ -78,6 +78,8 @@ const HostInfo *createFreeBSDHostInfo(const Driver &D,
                                       const llvm::Triple& Triple);
 const HostInfo *createDragonFlyHostInfo(const Driver &D,
                                         const llvm::Triple& Triple);
+const HostInfo *createTMS320C64XHostInfo(const Driver &D,
+                                         const llvm::Triple& Triple);
 const HostInfo *createLinuxHostInfo(const Driver &D,
                                     const llvm::Triple& Triple);
 const HostInfo *createTCEHostInfo(const Driver &D, 

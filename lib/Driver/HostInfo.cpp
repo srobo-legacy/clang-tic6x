@@ -495,9 +495,11 @@ public:
 };
 
 TMS320C64XHostInfo::~TMS320C64XHostInfo() {
+#if 0
   for (llvm::StringMap<ToolChain*>::iterator
          it = ToolChains.begin(), ie = ToolChains.end(); it != ie; ++it)
     delete it->second;
+#endif
 }
 
 bool TMS320C64XHostInfo::useDriverDriver() const {

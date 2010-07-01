@@ -1836,8 +1836,12 @@ namespace {
     virtual uint64_t getPointerAlignV(unsigned AddrSpace) const { return 32; }
     virtual void getTargetDefines(const LangOptions &Opts,
                                   MacroBuilder &Builder) const {
+      Builder.defineMacro("__tms320c64x");
+      Builder.defineMacro("__tic64x");
       Builder.defineMacro("__TMS320C64X__");
-      Builder.defineMacro("__BEES__");
+      Builder.defineMacro("__TIC64X__");
+
+      Builder.defineMacro("__LITTLE_ENDIAN__");
     }
     virtual void getTargetBuiltins(const Builtin::Info *&Records,
                                    unsigned &NumRecords) const {
